@@ -1,0 +1,29 @@
+{
+  "name": "swiftlint",
+  "version": "0.0.1",
+  "description": "Tiny SwiftLint wrapper for npm",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ionic-team/swiftlint.git"
+  },
+  "bin": {
+    "swiftlint": "bin.js"
+  },
+  "scripts": {
+    "postinstall": "node postinstall.js"
+  },
+  "files": [
+    "bin.js",
+    "postinstall.js"
+  ],
+  "keywords": [],
+  "author": "Ionic <hi@ionicframework.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ionic-team/swiftlint/issues"
+  },
+  "homepage": "https://github.com/ionic-team/swiftlint#readme",
+  "dependencies": {
+    "@ionic/utils-subprocess": "^2.1.3"
+  }
+}
