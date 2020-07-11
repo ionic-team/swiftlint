@@ -1,6 +1,6 @@
 {
   "name": "swiftlint",
-  "version": "0.0.1",
+  "version": "0.39.2",
   "description": "Tiny SwiftLint wrapper for npm",
   "repository": {
     "type": "git",
