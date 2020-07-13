@@ -20,7 +20,9 @@ const getConfigPath = async () => {
     const explorer = cosmiconfig('swiftlint');
     const result = await explorer.search();
     const tmppath = path.resolve(os.tmpdir(), 'swiftlint-config');
-    await writeJson(tmppath, result.config, { spaces: 2 });
+    const config = typeof result.config === 'string' ? require(result.config) : result.config;
+
+    await writeJson(tmppath, config, { spaces: 2 });
     console.log('swiftlint: using config from', result.filepath);
 
     return tmppath;
