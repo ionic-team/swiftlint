@@ -10,12 +10,35 @@ if (process.platform !== 'darwin') {
 }
 
 const { Subprocess } = require('@ionic/utils-subprocess');
+const { writeJson } = require('@ionic/utils-fs');
+const { cosmiconfig } = require('cosmiconfig');
+const os = require('os');
 const path = require('path');
 
-const proc = new Subprocess(
-  path.resolve(__dirname, 'build/SwiftLint/.build/release/swiftlint'),
-  process.argv.slice(2),
-  { stdio: 'inherit' },
-);
+const getConfigPath = async () => {
+  try {
+    const explorer = cosmiconfig('swiftlint');
+    const result = await explorer.search();
+    const tmppath = path.resolve(os.tmpdir(), 'swiftlint-config');
+    await writeJson(tmppath, result.config, { spaces: 2 });
+    console.log('swiftlint: using config from', result.filepath);
 
-proc.run().catch(() => { process.exit(1); });
+    return tmppath;
+  } catch (e) {
+    // ignore
+  }
+};
+
+const run = async () => {
+  const p = await getConfigPath();
+
+  const proc = new Subprocess(
+    path.resolve(__dirname, 'build/SwiftLint/.build/release/swiftlint'),
+    [...process.argv.slice(2), ...p ? ['--config', p] : []],
+    { stdio: 'inherit' },
+  );
+
+  await proc.run();
+};
+
+run().catch(() => { process.exit(1); });
