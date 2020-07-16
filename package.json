@@ -7,7 +7,7 @@
     "url": "git+https://github.com/ionic-team/swiftlint.git"
   },
   "bin": {
-    "swiftlint": "bin.js"
+    "node-swiftlint": "bin.js"
   },
   "scripts": {
     "postinstall": "node postinstall.js"

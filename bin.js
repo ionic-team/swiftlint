@@ -14,6 +14,7 @@ const { writeJson } = require('@ionic/utils-fs');
 const { cosmiconfig } = require('cosmiconfig');
 const os = require('os');
 const path = require('path');
+const { isInstalled } = require('./utils');
 
 const getConfigPath = async () => {
   try {
@@ -23,7 +24,7 @@ const getConfigPath = async () => {
     const config = typeof result.config === 'string' ? require(result.config) : result.config;
 
     await writeJson(tmppath, config, { spaces: 2 });
-    console.log('swiftlint: using config from', result.filepath);
+    console.log('node-swiftlint: using config from', result.filepath);
 
     return tmppath;
   } catch (e) {
@@ -32,15 +33,22 @@ const getConfigPath = async () => {
 };
 
 const run = async () => {
-  const p = await getConfigPath();
+  if (await isInstalled()) {
+    const p = await getConfigPath();
 
-  const proc = new Subprocess(
-    path.resolve(__dirname, 'build/SwiftLint/.build/release/swiftlint'),
-    [...process.argv.slice(2), ...p ? ['--config', p] : []],
-    { stdio: 'inherit' },
-  );
+    const proc = new Subprocess(
+      'swiftlint',
+      [...process.argv.slice(2), ...p ? ['--config', p] : []],
+      { stdio: 'inherit' },
+    );
 
-  await proc.run();
+    await proc.run();
+  } else {
+    console.log(
+      `!!! WARN: SwiftLint not found in PATH. You can install it with Homebrew:\n\n` +
+      `    > brew install swiftlint\n`
+    );
+  }
 };
 
 run().catch(() => { process.exit(1); });
