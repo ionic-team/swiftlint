@@ -14,7 +14,8 @@
   },
   "files": [
     "bin.js",
-    "postinstall.js"
+    "postinstall.js",
+    "utils.js"
   ],
   "keywords": [],
   "author": "Ionic <hi@ionicframework.com>",
