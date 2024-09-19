@@ -25,8 +25,8 @@
   },
   "homepage": "https://github.com/ionic-team/swiftlint#readme",
   "dependencies": {
-    "@ionic/utils-fs": "3.1.6",
-    "@ionic/utils-subprocess": "2.1.11",
-    "cosmiconfig": "^6.0.0"
+    "@ionic/utils-fs": "^3.1.7",
+    "@ionic/utils-subprocess": "^3.0.1",
+    "cosmiconfig": "^9.0.0"
   }
 }
