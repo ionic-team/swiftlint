@@ -1,8 +1,3 @@
-if (process.platform !== 'darwin') {
-  console.log('!!! WARN: SwiftLint cannot be used on non-macOS platforms\n');
-  process.exit(0);
-}
-
 const { isInstalled } = require('./utils');
 
 const run = async () => {
