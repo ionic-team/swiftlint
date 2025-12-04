@@ -3,12 +3,6 @@
 'use strict';
 
 process.title = 'swiftlint';
-
-if (process.platform !== 'darwin') {
-  console.log('!!! WARN: Not running SwiftLint for non-macOS platform: ' + process.platform + '\n');
-  process.exit();
-}
-
 const { Subprocess } = require('@ionic/utils-subprocess');
 const { writeJson } = require('@ionic/utils-fs');
 const { cosmiconfig } = require('cosmiconfig');
